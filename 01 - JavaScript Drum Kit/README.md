@@ -48,7 +48,3 @@ var element = document.querySelector('[data-key="68"]');
 
 - forEach:
   \*\* 不直接用 addEventlistner 的原因：若有用 jQuery 或類似的東西則沒辦法選到每一個項目
-
-## 不熟練的用法
-
-- arrow function
