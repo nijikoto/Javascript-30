@@ -21,19 +21,6 @@
 1. 理解 flow
 2. 按下按鈕改變 class 來改編
 
-```
-// 監聽鍵盤事件
-document.addEventListener("keydown", function (event) {
-  // 如果按下的是 'j' 鍵
-  if (event.key === "j") {
-    // 取得要修改class的元素
-    const element = document.getElementById("elementId");
-    // 修改class
-    element.classList.add("newClass");
-  }
-});
-```
-
 - keycode 轉變為 key 的寫法
 - 如何只選擇特定的 data-key 來修改 class
 
