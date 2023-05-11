@@ -43,3 +43,12 @@ javascript
 Copy code
 // 選擇 data-key 為 68 的元素
 var element = document.querySelector('[data-key="68"]');
+
+## 新學會的用法
+
+- forEach:
+  \*\* 不直接用 addEventlistner 的原因：若有用 jQuery 或類似的東西則沒辦法選到每一個項目
+
+## 不熟練的用法
+
+- arrow function

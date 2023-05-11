@@ -1,41 +1,36 @@
 "use strict";
+// 1. 於視窗設定監聽事件，並設定按下按鍵會function的event
+// 2. 設定function內的內容：
+// 1. 宣告並選擇指定的audio，並設定dynamic
+// 2. 設定function的內容：設定若無符合return
+// 3. 設定播放音訊
+// 4. 設定播放的 current time
+// 5. 宣告選擇的key並設定 dynamic 相應的內容
+// 6. 在指定的key追加playing class
+// 3. 設定每個key的監聽事件，宣告並選擇所有key
+// 4. 使用forEach 指定所有key的transition end，加上removeTransition
+// 5. 設定remove transition的function
+// 1. 設定若event object的內容 propertyName 不等同 transform則return
+// 2. 以this.(key) remove class playing
+// 6. 將步驟2設定的function 內容整理成playSoundfunction
+// 7. 將步驟一轉移到文件底部
 
-// 取得所有的按鍵和音效元素
-const keys = document.querySelectorAll(".key");
-const audios = document.querySelectorAll("audio");
+function playSound(e) {
+  const audio = document.querySelector(`audio[data-key=${e.key}]`);
+  const key = document.querySelector(`div[data-key=${e.key}]`);
+  if (!audio) return;
 
-// 將每個按鍵與音效做配對，並加上事件監聽器
-keys.forEach((key, index) => {
-  key.addEventListener("click", () => {
-    playSound(index);
-  });
-});
-
-// 當鍵盤按下時，判斷按下的鍵是否為已配對的按鍵，如果是，則播放相對應的音效
-document.addEventListener("keydown", (event) => {
-  const keyPressed = event.key.toLowerCase();
-  const index = getKeyIndex(keyPressed);
-  if (index !== -1) {
-    playSound(index);
-  }
-});
-
-// 播放音效並顯示按鍵的特效
-function playSound(index) {
-  const audio = audios[index];
-  const key = keys[index];
-  if (!audio) return; // 如果找不到對應的音效，則跳出函式
   audio.currentTime = 0;
   audio.play();
   key.classList.add("playing");
-  audio.addEventListener("ended", () => {
-    key.classList.remove("playing");
-  });
 }
 
-// 根據按下的鍵，尋找其對應的按鍵在配對陣列中的位置
-function getKeyIndex(key) {
-  const keyValues = ["a", "s", "d", "f", "g", "h", "j", "k", "l"];
-  const index = keyValues.indexOf(key);
-  return index;
+function removePlaying(e) {
+  if (e.propertyName !== transform) return;
+  // e.target.classList.remove('playing');
+  this.classList.remove("playing");
 }
+
+window.addEventListener("keydown", playSound);
+const keys = document.querySelectorAll(".key");
+keys.forEach((key) => key.addEventListener("transitionend", removePlaying));
