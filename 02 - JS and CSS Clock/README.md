@@ -74,16 +74,14 @@ let minutes = d.getMinutes();
 
 #### setInterval()
 
+> A function to be executed every `delay` milliseconds. The first execution happens after `delay` milliseconds. (MDN)
+> → function 會在每一毫秒後被執行
+
 - syntax:
 
 ```javascript
 setInterval(function, milliseconds);
-
 ```
-
-> A function to be executed every `delay` milliseconds. The first execution happens after `delay` milliseconds. (MDN)
-
-→ function 會在每一毫秒後被執行
 
 ## 計時器其他補充
 
@@ -99,3 +97,8 @@ syntax:
 ```javascript
 requestAnimationFrame(callback);
 ```
+
+## 參考資料
+
+[談談 JavaScript 的 setTimeout 與 setInterval](https://kuro.tw/posts/2019/02/23/%E8%AB%87%E8%AB%87-JavaScript-%E7%9A%84-setTimeout-%E8%88%87-setInterval/)
+[深入淺出 Javascript30 快速導覽：Day 2：CSS + JS Clock](https://www.youtube.com/watch?v=O1YsB3qxO4g&t=2491s)
