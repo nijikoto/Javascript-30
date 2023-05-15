@@ -75,13 +75,22 @@ let minutes = d.getMinutes();
 #### setInterval()
 
 > A function to be executed every `delay` milliseconds. The first execution happens after `delay` milliseconds. (MDN)
-> → function 會在每一毫秒後被執行
+
+- function 會在每一毫秒後被執行
 
 - syntax:
 
 ```javascript
 setInterval(function, milliseconds);
 ```
+
+## 作法
+
+1.  定義三個變數 `secondHand`、`minsHand` 和 `hourHand`，分別代表時鐘中的秒針、分針和時針。
+2.  定義一個 `setDate` 函數，用來取得現在的時間，並計算出時針、分針、秒針的角度。
+3.  在 `setDate` 函數中，透過 `style.transform` 設置秒針、分針、時針的 CSS 屬性 `transform` 的值，使它們旋轉到正確的角度。
+4.  透過 `setInterval` 函數設定 `setDate` 函數每 1000 毫秒執行一次，也就是讓時鐘每秒更新一次。
+5.  呼叫一次 `setDate` 函數，讓時鐘在一開始載入頁面時就顯示出正確的時間。
 
 ## 計時器其他補充
 
@@ -100,5 +109,5 @@ requestAnimationFrame(callback);
 
 ## 參考資料
 
-[談談 JavaScript 的 setTimeout 與 setInterval](https://kuro.tw/posts/2019/02/23/%E8%AB%87%E8%AB%87-JavaScript-%E7%9A%84-setTimeout-%E8%88%87-setInterval/)
-[深入淺出 Javascript30 快速導覽：Day 2：CSS + JS Clock](https://www.youtube.com/watch?v=O1YsB3qxO4g&t=2491s)
+- [談談 JavaScript 的 setTimeout 與 setInterval](https://kuro.tw/posts/2019/02/23/%E8%AB%87%E8%AB%87-JavaScript-%E7%9A%84-setTimeout-%E8%88%87-setInterval/)
+- [深入淺出 Javascript30 快速導覽：Day 2：CSS + JS Clock](https://www.youtube.com/watch?v=O1YsB3qxO4g&t=2491s)
