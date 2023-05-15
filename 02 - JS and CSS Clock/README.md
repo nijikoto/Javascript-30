@@ -87,7 +87,7 @@ setInterval(function, milliseconds);
 ## 作法
 
 1.  定義三個變數 `secondHand`、`minsHand` 和 `hourHand`，分別代表時鐘中的秒針、分針和時針。
-2.  定義一個 `setDate` 函數，用來取得現在的時間，並計算出時針、分針、秒針的角度。
+2.  定義一個 `setDate` function，用來取得現在的時間，並計算出時針、分針、秒針的角度。
 3.  在 `setDate` 函數中，透過 `style.transform` 設置秒針、分針、時針的 CSS 屬性 `transform` 的值，使它們旋轉到正確的角度。
 4.  透過 `setInterval` 函數設定 `setDate` 函數每 1000 毫秒執行一次，也就是讓時鐘每秒更新一次。
 5.  呼叫一次 `setDate` 函數，讓時鐘在一開始載入頁面時就顯示出正確的時間。
