@@ -23,7 +23,7 @@
 > The transform-origin CSS property sets the origin for an element's transformations. (MDN)
 
 - transform-origin 設定 element 的原點。
-- 預設為 50%(center)
+- 預設為 50%(center)，百分比基準點是相對於元素本身的寬度和高度的百分比。
 - syntax:
 
 ```css
