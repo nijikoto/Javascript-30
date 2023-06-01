@@ -123,3 +123,7 @@ fetch("https://api.github.com/users/wesbos")
 ![](https://i.imgur.com/ClBOIbA.png)
 
 測量程式碼區塊的執行時間，對於優化程式碼有幫助
+
+## 13. console.table()
+
+可以將 array 資料印出表格
