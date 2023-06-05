@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+  <link rel="icon" href="https://fav.farm/🔥" />
+</head>
+
+<body>
+  <canvas id="draw" width="800" height="800"></canvas>
+  <script>
+    //畫布設定
+    const canvas = document.querySelector('#draw');  //選定canvas
+    const ctx = canvas.getContext('2d'); //指定文件類型
+    canvas.width = window.innerWidth; //將 Canvas 元素的寬度設定為瀏覽器視窗的內部寬度，也就是瀏覽器可見區域的寬度。
+    canvas.height = window.innerHeight; //將Canvas 元素的高度設定為瀏覽器視窗的內部寬度，也就式瀏覽器可見區域的高度。
+    ctx.strokeStyle = '#BADA55';
+    ctx.lineJoin = 'round';//設定線條相交處的樣式
+    ctx.lineCap = 'round';//設定線條端點樣式
+    ctx.lineWidth = 100;//設定線條寬度
+    // ctx.globalCompositeOperation = 'multiply';//設定在繪製重疊形狀時的組合方式。
+
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+    let hue = 0;
+    let direction = true;
+
+    function draw(e) {
+      if (!isDrawing) return; // stop the fn from running when they are not moused down
+      console.log(e);
+      ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+      ctx.beginPath();
+      // start from
+      ctx.moveTo(lastX, lastY);
+      // go to
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+      [lastX, lastY] = [e.offsetX, e.offsetY];
+
+      hue++;
+      if (hue >= 360) {
+        hue = 0;
+      }
+      if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
+        direction = !direction;
+      }
+
+      if (direction) {
+        ctx.lineWidth++;
+      } else {
+        ctx.lineWidth--;
+      }
+
+    }
+
+    canvas.addEventListener('mousedown', (e) => {
+      isDrawing = true;
+      [lastX, lastY] = [e.offsetX, e.offsetY];
+    });
+
+
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', () => isDrawing = false);
+    canvas.addEventListener('mouseout', () => isDrawing = false);
+  </script>
+
+  <style>
+    html,
+    body {
+      margin: 0;
+    }
+  </style>
+
+</body>
+
+</html>
