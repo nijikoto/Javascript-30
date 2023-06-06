@@ -91,27 +91,28 @@ volumeSlider.addEventListener("change", function () {
 - 這個事件在使用者拖動滑塊的過程中連續觸發。
 - 可以使用 `input` 事件來監聽滑塊值的即時變化。
 
-````javascript
+```javascript
 const volumeSlider = document.querySelector('.player__slider[name="volume"]');
 
-volumeSlider.addEventListener('input', function() {
+volumeSlider.addEventListener("input", function () {
   const currentValue = volumeSlider.value;
   // 在這裡處理滑塊值的變化
 });
+```
 
 ## 學習筆記
-- function 應該為togglePlay，而不是playVideo，應以要控制的元件可能出現的情況來設想
-- 在選定document，同質性的可以寫一起不用分開控制，如：range
-- 播放影片應同時考量到直接點選video的可能，也就是toggle 按鈕和video都應該設置addEventListener
-- 當有複數選定項目，addEventListener要記得用 forEach
-- 隨時透過console.log()來檢視目前正要製作的項目是否被執行
+
+- function 應該為 togglePlay，而不是 playVideo，應以要控制的元件可能出現的情況來設想
+- 在選定 document，同質性的可以寫一起不用分開控制，如：range
+- 播放影片應同時考量到直接點選 video 的可能，也就是 toggle 按鈕和 video 都應該設置 addEventListener
+- 當有複數選定項目，addEventListener 要記得用 forEach
+- 隨時透過 console.log()來檢視目前正要製作的項目是否被執行
+
 ```javascript
 function adjustRange() {
-
-console.log(this.value);
-
+  console.log(this.value);
 }
-````
+```
 
 - range 自己試做沒有成功的原因：
   - 沒有使用到 forEach()
