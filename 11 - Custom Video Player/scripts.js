@@ -22,20 +22,43 @@ function updateButton() {
   toggle.textContent = icon;
 }
 
+function skip() {
+  console.log(this.dataset.skip);
+  video.currentTime += parseFloat(this.dataset.skip);
+}
+
 // adjust the range for volume and playbackRate
 function adjustRange() {
   video[this.name] = this.value;
-  console.log(this.name);
-  console.log(this.value);
 }
+
+//progress
+function handleProgress() {
+  //make it percentage
+  const percent = (video.currentTime / video.duration) * 100;
+  progressBar.style.flexBasis = `${percent}%`;
+}
+
+function scrub(e) {
+  const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
+  video.currentTime = scrubTime;
+}
+
 //hook up the event listeners
 toggle.addEventListener("click", togglePlay);
 video.addEventListener("click", togglePlay);
 video.addEventListener("play", updateButton);
 video.addEventListener("pause", updateButton);
 
-// ranges.addEventListener("input", adjustRange);
-// ranges.addEventListener("change", adjustRange);
+skipButtons.forEach((button) => button.addEventListener("click", skip));
+
+video.addEventListener("timeupdate", handleProgress);
 
 ranges.forEach((range) => range.addEventListener("change", adjustRange));
 ranges.forEach((range) => range.addEventListener("mousemove", adjustRange));
+
+let mousedown = false;
+progress.addEventListener("click", scrub);
+progress.addEventListener("mousemove", (e) => mousedown && scrub(e)); //when someone moves mouse we said mousedown & scrub (1) it checks the variables if it is true moves to scrub, if it is false then it wont't run scrub
+progress.addEventListener("mousedown", () => (mousedown = true));
+progress.addEventListener("mouseup", () => (mousedown = false));

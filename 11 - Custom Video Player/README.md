@@ -1,8 +1,8 @@
-# Day 11 Custom video player（未完）
+# Day 11 Custom video player
 
 ## 理解問題
 
-- 客製化一影片播放器，讓播放器有播放、快轉、skipped
+- 客製化一影片播放器，讓播放器有播放\暫停、聲音大小調節、加速播放、進度條控制、快進快退的功能。
 
 ## 拆解問題
 
@@ -17,7 +17,16 @@
 
 ### 加速
 
-### skipped
+- 透過拖拉來加速影片
+
+### 進度條
+
+- 當影片在播放狀態時，符合影片的進度百分比
+- 拖拉時能同步進度的百分比
+
+### 快進快退
+
+能藉由點擊按鈕達到指定快進時間
 
 ## 研究課題
 
@@ -100,6 +109,44 @@ volumeSlider.addEventListener("input", function () {
 });
 ```
 
+### 進度條的程式邏輯
+
+#### function
+
+- 計算當前播放時間 (`video.currentTime`) 和總播放時間 (`video.duration`) 的比例，通過將當前播放時間除以總播放時間然後乘以 100 來取得。這個比例表示影片已經播放了多少百分比。
+  > `video.duration`
+  > The *read-only* [`HTMLMediaElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement) property **`duration`** indicates the length of the element's media in seconds. (MDN)
+
+→ 指出媒體元素的總長度（秒數）
+
+> `video.currentTime`
+> The [`HTMLMediaElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement) interface's **`currentTime`** property specifies the current playback time in seconds.
+
+→ 指出當前媒體元素的時間（秒數）
+
+- 將計算得到的進度條百分比 (`percent`) 格式化成字串，並加上百分號符號，以便將其應用到進度條元素的 `flexBasis` 屬性上。例如，如果 `percent` 是 50，則 `flexBasis` 的值為 "50%"。
+
+- 將計算得到的進度條百分比設置給進度條元素的 `flexBasis` 屬性，這樣進度條的寬度就會根據播放進度的變化而改變。
+
+#### event listeners
+
+- 宣告一個名為 `mousedown` 的變數，並將其初始化為 `false`。這個變數用於追蹤滑鼠按鈕的狀態，當滑鼠按鈕按下時，將 `mousedown` 設置為 `true`，當滑鼠按鈕釋放時，將 `mousedown` 設置為 `false`。
+- 綁定 `click` 事件到進度條元素，並將 `scrub` 函式作為事件處理程序。這表示當使用者在進度條上點擊時，會執行 `scrub` ，以將影片的播放位置調整為點擊位置對應的時間。
+- 綁定 `mousemove` 事件到進度條元素，並使用 `(e) => mousedown && scrub(e)` 作為事件處理程序。這個處理程序首先檢查 `mousedown` 變數的值，只有當 `mousedown` 為 `true` 時才執行 `scrub` 函式。 ⇨⇨ 意味著只有在滑鼠按鈕按下且滑鼠在進度條上移動時，才會執行 `scrub`，這樣能避免在拖曳進度條時不必要地觸發 `scrub` 函式。
+- 綁定 `mousedown` 事件到進度條元素，並將 `mousedown` 設置為 `true`。這表示當滑鼠按鈕按下時，會將 `mousedown` 設置為 `true`，以標記滑鼠按鈕的狀態。
+- 綁定 `mouseup` 事件到進度條元素，並將 `mousedown` 設置為 `false`。這表示當滑鼠按鈕釋放時，會將 `mousedown` 設置為 `false`，以標記滑鼠按鈕的狀態。
+
+### 快進快退按鈕
+
+#### function
+
+- 透過`parseFloat(this.dataset.skip)`將 data-skip 轉為浮點數
+- 將目前的播放時間 `video.currentTime` 加上 `parseFloat(this.dataset.skip)` 的值。
+
+> The **`parseFloat()`** function parses a string argument and returns a floating point number.
+
+能夠將字串轉換為浮點
+
 ## 學習筆記
 
 - function 應該為 togglePlay，而不是 playVideo，應以要控制的元件可能出現的情況來設想
@@ -115,6 +162,21 @@ function adjustRange() {
 ```
 
 - range 自己試做沒有成功的原因：
+
   - 沒有使用到 forEach()
   - 將`mousemove`誤用為`input`
   - 應該要更新影片元素的屬性值，而不是更新 `<input>` 元素的值。（這邊不太懂，待研究）
+
+- 透過 console.log function 來確認
+
+```javascript
+function scrub(e) {
+  console.log(e);
+}
+
+progress.addEventListener("click", scrub);
+```
+
+![](https://i.imgur.com/QK0jCvC.png)
+
+- 使用者「拖曳」這件事情可以拆分的更細，拖曳本身即包含「點擊、拖曳（同步）、釋放滑鼠」，也應當設想「不必要觸發的情境」
