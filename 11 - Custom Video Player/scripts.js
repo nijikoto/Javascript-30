@@ -29,6 +29,8 @@ function skip() {
 
 // adjust the range for volume and playbackRate
 function adjustRange() {
+  console.log(this.name);
+  console.log(video.volume);
   video[this.name] = this.value;
 }
 
