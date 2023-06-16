@@ -64,11 +64,6 @@ const reduceArr = arr.reduce((accumulator, currentValue) => {
 
 ## 操作筆記
 
-### steps
-
-1. 選取所有[data-type]的項目
-2. turn node list into array
-
 ### nodelist 轉換成 array
 
 ```javascript
