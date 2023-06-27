@@ -184,6 +184,8 @@ function toggle(startOver = true) {
 stopButton.addEventListener("click", toggle(false));
 ```
 
+addEventListener 方法需要一個函式參考作為第二個參數，當事件觸發時，該函式將被呼叫。然而，通過在 toggle(false) 後面使用括號，實際上立即執行了 toggle 函式，並將其返回值（undefined）作為事件監聽器傳遞，這是無效的。
+
 - 解決的二種方法：
   第一種：
 
