@@ -1,4 +1,4 @@
-# Day 27JavaScript Interface Challenge- Click and Drag to Scroll
+# Day 27 JavaScript Interface Challenge- Click and Drag to Scroll
 
 ## 理解問題
 
